@@ -34,15 +34,15 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=3001
-      - MONGO_URI=mongodb://mongodb:27017/medicinefinder
-      - JWT_SECRET=supersecretkey
-      - JWT_REFRESH_SECRET=superrefreshsecretkey
-      - GOOGLE_CLIENT_ID=9900245765651-32dl1bhrpt2210fg56pvmtsnobeqcpnl.apps.googleusercontent.com
-      - WEB_CLIENT_ID=900245765651-a2v7i2jto8k0f4ebuih7uuoac5kc790c.apps.googleusercontent.com
+      - MONGO_URI=${MONGO_URI}
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_REFRESH_SECRET=${JWT_REFRESH_SECRET}
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - WEB_CLIENT_ID=${WEB_CLIENT_ID}
       - ALLOWED_ORIGINS=http://localhost:3000,http://localhost:3001
-      - FRONTEND_URL=https://yourfrontend.com
+      - FRONTEND_URL=${FRONTEND_URL}
       - BREVO_API_KEY=${BREVO_API_KEY}
-      - BREVO_USER=sidric6@gmail.com
+      - BREVO_USER=${BREVO_USER}
       - KAFKA_BROKERS=kafka:29092
       - KAFKA_CLIENT_ID=auth-service
       - KAFKA_GROUP_ID=auth-service-group
@@ -74,13 +74,13 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=3002
-      - MONGO_URI=mongodb://mongodb:27017/medicinefinder
-      - JWT_SECRET=your-super-secret-jwt-key-change-in-production
+      - MONGO_URI=${MONGO_URI}
+      - JWT_SECRET=${JWT_SECRET}
       - ALLOWED_ORIGINS=http://localhost:3000,http://localhost:3001,http://localhost:3002
       - UPLOAD_PATH=./uploads
       - MAX_FILE_SIZE=5242880
       - AUTH_SERVICE_URL=http://auth-service:3001
-      - INTERNAL_API_KEY=internal-service-key
+      - INTERNAL_API_KEY=${INTERNAL_API_KEY}
       - KAFKA_BROKERS=kafka:29092
       - KAFKA_CLIENT_ID=user-service
       - KAFKA_GROUP_ID=user-service-group
@@ -111,25 +111,13 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=3003
-      - MONGO_URI=mongodb://mongodb:27017/medicinefinder
-      - JWT_SECRET=your-super-secret-jwt-key-change-in-production
+      - MONGO_URI=${MONGO_URI}
+      - JWT_SECRET=${JWT_SECRET}
       - ALLOWED_ORIGINS=http://localhost:3000,http://localhost:3001,http://localhost:3002,http://localhost:3003
       - KAFKA_BROKERS=kafka:29092
       - KAFKA_CLIENT_ID=notification-service
       - KAFKA_GROUP_ID=notification-service-group
-      # Email configuration
-      - SMTP_HOST=smtp.gmail.com
-      - SMTP_PORT=587
-      - SMTP_USER=your-email@gmail.com
-      - SMTP_PASS=your-app-password
-      # Brevo (SendinBlue) configuration
       - BREVO_API_KEY=${BREVO_API_KEY}
-      # Twilio SMS configuration
-      - TWILIO_ACCOUNT_SID=your-twilio-sid
-      - TWILIO_AUTH_TOKEN=your-twilio-token
-      - TWILIO_PHONE_NUMBER=+1234567890
-      # Push notification (placeholder)
-      - FCM_SERVER_KEY=your-fcm-server-key
     depends_on:
       auth-service:
         condition: service_healthy
@@ -157,8 +145,8 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=3004
-      - MONGO_URI=mongodb://mongodb:27017/medicinefinder
-      - JWT_SECRET=your-super-secret-jwt-key-change-in-production
+      - MONGO_URI=${MONGO_URI}
+      - JWT_SECRET=${JWT_SECRET}
       - ALLOWED_ORIGINS=http://localhost:3000,http://localhost:3001,http://localhost:3002,http://localhost:3003,http://localhost:3004
       - UPLOAD_PATH=./uploads
       - MAX_FILE_SIZE=5242880
@@ -263,3 +251,4 @@ volumes:
 networks:
   medicinefinder-network:
     driver: bridge
+
